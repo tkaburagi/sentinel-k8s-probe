@@ -10,7 +10,7 @@ validate_probe = rule {
             all spec.template as _, template {
                 all template.spec  as _, spec2 {
                     all spec2.container as _, container {
-                        container contains "aaaaaaaa"
+                        container contains "liveness_probe"
                     }
                 }
             }
