@@ -1,12 +1,12 @@
-import "tfplan/v2" as tfplan
+import "tfconfig/v2" as tfconfig
 
-allK8sDeplyoments = filter tfplan.resource_changes as _, resource_changes {
-    resource_changes.type is "kubernetes_deployment"
+allK8sDeplyoments = filter tfconfig.resources as _, resources {
+    resources.type is "kubernetes_deployment"
 }
 
 validate_probe = rule {
     all allK8sDeplyoments as _, d {
-        all d.change.after.spec as _, spec {
+        all d.config.spec as _, spec {
             all spec.template as _, template {
                 all template.spec  as _, spec2 {
                     all spec2.container as _, container {
